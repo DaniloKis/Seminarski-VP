@@ -6,8 +6,7 @@ class PaketRepo extends Tabela {
     // 5 OznakaUpozorenja, 6 Tezina, 7 Cena, 8 Status, 9 IDKurira, 10 Kurir (Ime Prezime)
 
     private function OsnovniUpit() {
-        // Sve kolone su vec definisane u pogledu (PAKET INNER JOIN KURIR),
-        // redosledom naznacenim u komentaru iznad, pa je dovoljno SELECT *.
+
         return "SELECT * FROM SviPodaciOPaketima";
     }
 
