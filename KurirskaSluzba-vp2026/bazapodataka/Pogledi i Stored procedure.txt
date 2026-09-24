@@ -1,0 +1,18 @@
+RESENJE - POGLED
+------------------------------------------
+DROP VIEW IF EXISTS `Kurirska_Sluzba_2026`.`SviPodaciOPaketima`;
+CREATE VIEW `Kurirska_Sluzba_2026`.`SviPodaciOPaketima` AS select `PAKET`.`SifraPaketa`, `PAKET`.`Posiljalac`, `PAKET`.`AdresaPosiljaoca`, `PAKET`.`Primalac`, `PAKET`.`AdresaDostave`, `PAKET`.`OznakaUpozorenja`, `PAKET`.`Tezina`, `PAKET`.`Cena`, `PAKET`.`Status`, `PAKET`.`IDKurira`, concat(`KURIR`.`Ime`,' ',`KURIR`.`Prezime`) as `Kurir` from `Kurirska_Sluzba_2026`.`PAKET` INNER JOIN `Kurirska_Sluzba_2026`.`KURIR` ON `Kurirska_Sluzba_2026`.`PAKET`.`IDKurira`=`Kurirska_Sluzba_2026`.`KURIR`.`IDKurira`;
+
+
+RESENJE ZA STORED PROCEDURU - insert into
+-----------------------
+USE `Kurirska_Sluzba_2026`;
+DROP procedure IF EXISTS `DodajPaket`;
+DELIMITER $$
+USE `Kurirska_Sluzba_2026`$$
+CREATE PROCEDURE `DodajPaket` (IN SifraPaketaParametar varchar(15), IN PosiljalacParametar varchar(80), IN AdresaPosiljaocaParametar varchar(120), IN PrimalacParametar varchar(80), IN AdresaDostaveParametar varchar(120), IN OznakaUpozorenjaParametar varchar(30), IN TezinaParametar decimal(6,2), IN CenaParametar decimal(10,2), IN StatusParametar varchar(20), IN IDKuriraParametar varchar(10))
+BEGIN
+INSERT INTO `PAKET` (`SifraPaketa`, `Posiljalac`, `AdresaPosiljaoca`, `Primalac`, `AdresaDostave`, `OznakaUpozorenja`, `Tezina`, `Cena`, `Status`, `IDKurira`) VALUES (SifraPaketaParametar, PosiljalacParametar, AdresaPosiljaocaParametar, PrimalacParametar, AdresaDostaveParametar, OznakaUpozorenjaParametar, TezinaParametar, CenaParametar, StatusParametar, IDKuriraParametar);
+END
+$$
+DELIMITER ;

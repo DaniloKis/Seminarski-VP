@@ -1,0 +1,49 @@
+﻿CREATE DATABASE `Kurirska_Sluzba_2026` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+create table `Kurirska_Sluzba_2026`.`KURIR`
+(
+   IDKurira         varchar(10) NOT NULL PRIMARY KEY,
+   Prezime          varchar(50) not null,
+   Ime              varchar(50) not null,
+   Telefon          varchar(20) not null,
+   UkupanBrojPaketa int not null
+);
+
+
+create table `Kurirska_Sluzba_2026`.`PAKET`
+(
+   SifraPaketa      varchar(15)   NOT NULL PRIMARY KEY,
+   Posiljalac       varchar(80)   not null,
+   AdresaPosiljaoca varchar(120)  not null,
+   Primalac         varchar(80)   not null,
+   AdresaDostave    varchar(120)  not null,
+   OznakaUpozorenja varchar(30)   not null,
+   Tezina           decimal(6,2)  not null,
+   Cena             decimal(10,2) not null,
+   Status           varchar(20)   not null,
+   IDKurira         varchar(10)   not null
+);
+
+
+alter table `Kurirska_Sluzba_2026`.`PAKET` add constraint FK_NOSI foreign key (IDKurira) references `Kurirska_Sluzba_2026`.`KURIR`(IDKurira) on delete restrict on update cascade;
+
+
+create table `Kurirska_Sluzba_2026`.`KORISNIK`
+(
+   IDKORISNIKA          int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   PREZIME              varchar(50) not null,
+   IME                  varchar(40) not null,
+   EMAIL                varchar(60) not null,
+   KORISNICKOIME        varchar(30) not null,
+   SIFRA                varchar(30) not null,
+   statusucesca		varchar(30) not null
+);
+
+
+
+INSERT INTO `Kurirska_Sluzba_2026`.`KORISNIK` (PREZIME, IME, EMAIL, KORISNICKOIME, SIFRA, STATUSUCESCA) VALUES ('Киш','Данило', 'dkis@gmail.com', 'dkis', 'dk', 'admin');
+
+INSERT INTO `Kurirska_Sluzba_2026`.`KURIR` (IDKurira, Prezime, Ime, Telefon, UkupanBrojPaketa) VALUES ('K01', 'Петровић', 'Марко', '0641111111', 0);
+INSERT INTO `Kurirska_Sluzba_2026`.`KURIR` (IDKurira, Prezime, Ime, Telefon, UkupanBrojPaketa) VALUES ('K02', 'Јовановић', 'Ана', '0642222222', 0);
+
